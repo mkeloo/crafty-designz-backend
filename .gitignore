@@ -1,0 +1,21 @@
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+
+# dotenv environment variables
+.env
+
+# Debug and error logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Output directories
+dist/
+build/
+
+# Misc
+.DS_Store
