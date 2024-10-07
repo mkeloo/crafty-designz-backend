@@ -1,10 +1,18 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors'); // Import the cors package
 const pool = require('./config/database'); // Your database connection
 
 dotenv.config(); // Load environment variables
 
 const app = express();
+
+// Enable CORS for all origins or specify the frontend origin
+app.use(
+  cors({
+    origin: 'http://localhost:3000', // Allow requests from your frontend origin
+  })
+);
 
 // Middleware to parse incoming JSON requests
 app.use(express.json());
