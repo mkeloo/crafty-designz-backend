@@ -20,10 +20,13 @@ app.get('/', async (req, res) => {
 
     console.log('Database query successful:', result.rows[0]);
 
-    res.send(`DB connection successful! Server time: ${result.rows[0].now}`);
+    res.json({
+      message: 'DB connection successful!',
+      serverTime: result.rows[0].now,
+    });
   } catch (err) {
     console.error('Error connecting to the database:', err.message, err.stack);
-    res.status(500).send('Failed to connect to the database');
+    res.status(500).json({ error: 'Failed to connect to the database' });
   }
 });
 
