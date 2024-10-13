@@ -36,6 +36,23 @@ const createCategory = async (req, res) => {
   }
 };
 
+// Controller function to update a category by ID
+const updateCategory = async (req, res) => {
+  try {
+    const updatedCategory = await categoryModel.updateCategory(
+      req.params.id,
+      req.body
+    );
+    if (!updatedCategory) {
+      res.status(404).json({ error: 'Category not found' });
+    } else {
+      res.status(200).json(updatedCategory);
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 // Controller function to delete a category by ID
 const deleteCategory = async (req, res) => {
   try {
@@ -54,5 +71,6 @@ module.exports = {
   getAllCategories,
   getCategoryById,
   createCategory,
+  updateCategory,
   deleteCategory,
 };

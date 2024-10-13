@@ -26,16 +26,6 @@ const getInventoryById = async (req, res) => {
   }
 };
 
-// Controller function to create a new inventory item
-const createInventory = async (req, res) => {
-  try {
-    const newInventory = await inventoryModel.createInventory(req.body);
-    res.status(201).json(newInventory);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
 // Controller function to delete an inventory item by ID
 const deleteInventory = async (req, res) => {
   try {
@@ -55,6 +45,5 @@ const deleteInventory = async (req, res) => {
 module.exports = {
   getAllInventory,
   getInventoryById,
-  createInventory,
   deleteInventory,
 };

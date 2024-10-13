@@ -47,6 +47,26 @@ const createCategory = async (categoryData) => {
   }
 };
 
+// Function to update a category by ID in the database
+const updateCategory = async (categoryId, categoryData) => {
+  const { category_name, description } = categoryData;
+
+  try {
+    const result = await pool.query(
+      `UPDATE Categories 
+      SET category_name = $1,
+          description = $2
+      WHERE category_id = $3
+      RETURNING *`,
+      [category_name, description, categoryId]
+    );
+
+    return result.rows[0];
+  } catch (error) {
+    throw new Error('Error updating category: ' + error.message);
+  }
+};
+
 // Function to delete a category by ID from the database
 const deleteCategory = async (categoryId) => {
   try {
@@ -64,5 +84,6 @@ module.exports = {
   getAllCategories,
   getCategoryById,
   createCategory,
+  updateCategory,
   deleteCategory,
 };

@@ -36,6 +36,23 @@ const createProduct = async (req, res) => {
   }
 };
 
+// Controller function to update a product by ID
+const updateProduct = async (req, res) => {
+  try {
+    const updatedProduct = await productModel.updateProduct(
+      req.params.id,
+      req.body
+    );
+    if (!updatedProduct) {
+      res.status(404).json({ error: 'Product not found' });
+    } else {
+      res.status(200).json(updatedProduct);
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 // Controller function to delete a product by ID
 const deleteProduct = async (req, res) => {
   try {
@@ -54,5 +71,6 @@ module.exports = {
   getAllProducts,
   getProductById,
   createProduct,
+  updateProduct,
   deleteProduct,
 };

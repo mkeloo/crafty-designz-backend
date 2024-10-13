@@ -27,38 +27,6 @@ const getInventoryById = async (inventoryId) => {
   }
 };
 
-// Function to create a new inventory item in the database
-const createInventory = async (inventoryData) => {
-  const {
-    product_slug,
-    product_id,
-    category_id,
-    stock_quantity,
-    last_restocked_date,
-  } = inventoryData;
-
-  try {
-    const result = await pool.query(
-      `INSERT INTO Inventory 
-        (product_slug, product_id, category_id, stock_quantity, last_restocked_date) 
-      VALUES 
-        ($1, $2, $3, $4, $5)
-      RETURNING *`,
-      [
-        product_slug,
-        product_id,
-        category_id,
-        stock_quantity,
-        last_restocked_date,
-      ]
-    );
-
-    return result.rows[0];
-  } catch (error) {
-    throw new Error('Error creating inventory: ' + error.message);
-  }
-};
-
 // Function to delete an inventory item by ID from the database
 const deleteInventory = async (inventoryId) => {
   try {
@@ -75,6 +43,5 @@ const deleteInventory = async (inventoryId) => {
 module.exports = {
   getAllInventory,
   getInventoryById,
-  createInventory,
   deleteInventory,
 };

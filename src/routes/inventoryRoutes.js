@@ -11,7 +11,7 @@ router.get('/inventory', inventoryController.getAllInventory);
 router.get('/inventory/:id', inventoryController.getInventoryById);
 
 // Route to create a new inventory item
-router.post('/inventory', inventoryController.createInventory);
+// router.post('/inventory', inventoryController.createInventory);
 
 // Route to delete an inventory item by ID
 router.delete('/inventory/:id', inventoryController.deleteInventory);
