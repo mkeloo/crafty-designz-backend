@@ -1,54 +1,44 @@
-# Products Table (Split Version)
+# Categories
 
-## Categories Table
+- category_id (SERIAL, PRIMARY KEY)
+- category_name (VARCHAR, NOT NULL, UNIQUE)
+- description (TEXT)
+- created_at (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)
+- updated_at (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)
 
-- Category ID (Primary Key)
-- Category Name (e.g., Self Defense Keychains, Blankets)
-- Description (Optional)
-- created_at (Timestamp)
-- updated_at (Timestamp)
+# Products
 
-## Products Table
+- product_id (SERIAL, PRIMARY KEY)
+- product_slug (VARCHAR, UNIQUE, NOT NULL)
+- product_name (VARCHAR, NOT NULL)
+- category_id (INTEGER, REFERENCES Categories)
+- set_size (INTEGER)
+- color (VARCHAR, NOT NULL)
+- cost (DECIMAL, NOT NULL)
+- price (DECIMAL, NOT NULL)
+- discount_price (DECIMAL)
+- description (TEXT)
+- created_at (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)
+- updated_at (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)
 
-- Product ID (Primary Key)
-- Product Name
-- Category ID (Foreign Key, linking to Categories Table)
-- Set Size (e.g., number of pieces in a set)
-- created_at (Timestamp)
-- updated_at (Timestamp)
+# Media
 
-## Pricing Table
+- media_id (SERIAL, PRIMARY KEY)
+- product_id (INTEGER, REFERENCES Products)
+- category_id (INTEGER, REFERENCES Categories)
+- media_type (VARCHAR, NOT NULL)
+- media_url (TEXT, NOT NULL)
+- created_at (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)
+- updated_at (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)
 
-- Product ID (Foreign Key)
-- Cost
-- Price
-- Discount Price
-- created_at (Timestamp)
-- updated_at (Timestamp)
+# Inventory
 
-## Product Details Table
-
-- Product ID (Foreign Key)
-- Description
-- created_at (Timestamp)
-- updated_at (Timestamp)
-
-## Media Table
-
-- Media ID (Primary Key)
-- Product ID (Foreign Key, linking to Products Table)
-- Color (Optional, represents the color variation associated with the media)
-- Media Type (e.g., 'image', 'video')
-- Media URL
-- created_at (Timestamp)
-- updated_at (Timestamp)
-
-## Inventory Table
-
-- Inventory ID (Primary Key)
-- Product ID (Foreign Key, linking to Products Table)
-- Color
-- Stock Quantity
-- Last Restocked Date
-- created_at (Timestamp)
-- updated_at (Timestamp)
+- inventory_id (SERIAL, PRIMARY KEY)
+- product_slug (VARCHAR, REFERENCES Products)
+- inventory_uuid (UUID, DEFAULT gen_random_uuid(), UNIQUE)
+- product_id (INTEGER, REFERENCES Products)
+- category_id (INTEGER, REFERENCES Categories)
+- stock_quantity (INTEGER, NOT NULL)
+- last_restocked_date (TIMESTAMP)
+- created_at (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)
+- updated_at (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)

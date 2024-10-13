@@ -1,20 +1,49 @@
 # E-commerce Store Database Design Higher Level
 
+## Categories Table
+
+- Category ID (Primary Key)
+- Category Name (Unique)
+- Description
+- Created At (Timestamp)
+- Updated At (Timestamp)
+
 ## Products Table
 
 - Product ID (Primary Key)
+- Product Slug (Unique)
 - Product Name
-- Category
-- Type (e.g., pieces)
+- Category ID (Foreign Key)
+- Set Size (e.g., number of pieces)
+- Color (Each product entry represents a unique color variant)
 - Cost
 - Price
 - Discount Price
-- Color
 - Description
-- Images (URLs)
+- Created At (Timestamp)
+- Updated At (Timestamp)
+
+## Media Table
+
+- Media ID (Primary Key)
+- Product ID (Foreign Key)
+- Category ID (Foreign Key)
+- Media Type (e.g., image, video)
+- Media URL
+- Created At (Timestamp)
+- Updated At (Timestamp)
+
+## Inventory Table
+
+- Inventory ID (Primary Key)
+- Product Slug (Foreign Key)
+- Inventory UUID (Globally Unique Identifier)
+- Product ID (Foreign Key)
+- Category ID (Foreign Key)
 - Stock Quantity
-- created_at (Timestamp)
-- updated_at (Timestamp)
+- Last Restocked Date
+- Created At (Timestamp)
+- Updated At (Timestamp)
 
 ## Customers Table
 
@@ -46,13 +75,6 @@
 - Quantity
 - Price at Time of Order
 - Discount Applied
-
-## Inventory Table
-
-- Product ID (Foreign Key)
-- Stock Quantity
-- Last Updated Date
-- Adjustment Reason
 
 ## Payments Table
 
