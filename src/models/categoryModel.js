@@ -47,8 +47,22 @@ const createCategory = async (categoryData) => {
   }
 };
 
+// Function to delete a category by ID from the database
+const deleteCategory = async (categoryId) => {
+  try {
+    const result = await pool.query(
+      'DELETE FROM Categories WHERE category_id = $1 RETURNING *',
+      [categoryId]
+    );
+    return result.rows[0];
+  } catch (error) {
+    throw new Error('Error deleting category: ' + error.message);
+  }
+};
+
 module.exports = {
   getAllCategories,
   getCategoryById,
   createCategory,
+  deleteCategory,
 };

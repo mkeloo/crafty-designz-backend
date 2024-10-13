@@ -67,8 +67,22 @@ const createProduct = async (productData) => {
   }
 };
 
+// Function to delete a product by ID from the database
+const deleteProduct = async (productId) => {
+  try {
+    const result = await pool.query(
+      'DELETE FROM Products WHERE product_id = $1 RETURNING *',
+      [productId]
+    );
+    return result.rows[0];
+  } catch (error) {
+    throw new Error('Error deleting product: ' + error.message);
+  }
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
   createProduct,
+  deleteProduct,
 };

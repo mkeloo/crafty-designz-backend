@@ -36,8 +36,25 @@ const createInventory = async (req, res) => {
   }
 };
 
+// Controller function to delete an inventory item by ID
+const deleteInventory = async (req, res) => {
+  try {
+    const deletedInventory = await inventoryModel.deleteInventory(
+      req.params.id
+    );
+    if (!deletedInventory) {
+      res.status(404).json({ error: 'Inventory item not found' });
+    } else {
+      res.status(200).json({ message: 'Inventory item deleted successfully' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   getAllInventory,
   getInventoryById,
   createInventory,
+  deleteInventory,
 };

@@ -59,8 +59,22 @@ const createInventory = async (inventoryData) => {
   }
 };
 
+// Function to delete an inventory item by ID from the database
+const deleteInventory = async (inventoryId) => {
+  try {
+    const result = await pool.query(
+      'DELETE FROM Inventory WHERE inventory_id = $1 RETURNING *',
+      [inventoryId]
+    );
+    return result.rows[0];
+  } catch (error) {
+    throw new Error('Error deleting inventory item: ' + error.message);
+  }
+};
+
 module.exports = {
   getAllInventory,
   getInventoryById,
   createInventory,
+  deleteInventory,
 };
