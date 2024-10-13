@@ -5,6 +5,8 @@ const dotenv = require('dotenv');
 const cors = require('cors'); // Import the cors package
 const pool = require('./config/database'); // Your database connection
 const categoryRoutes = require('./routes/categoryRoutes'); // Import the category routes
+const productRoutes = require('./routes/productRoutes'); // Import the product routes
+const inventoryRoutes = require('./routes/inventoryRoutes'); // Import the inventory routes
 
 dotenv.config(); // Load environment variables
 
@@ -44,6 +46,8 @@ app.get('/', async (req, res) => {
 
 // Use the category routes
 app.use('/api', categoryRoutes);
+app.use('/api', productRoutes);
+app.use('/api', inventoryRoutes);
 
 // Add a health check endpoint for /api
 app.get('/api', (req, res) => {
